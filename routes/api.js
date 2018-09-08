@@ -20,6 +20,9 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+var Stock = require('../models/stock');
+
+
 //Index page (static HTML)
 router.get('/', (req, res) => {
   res.sendFile(process.cwd() + '/views/index.html');
@@ -27,10 +30,7 @@ router.get('/', (req, res) => {
 
 router.get('/api/stock-prices',(req, res) => {
   let stock = req.query.stock;
-  let like, price;
-  
-  if (req.query.like) {like=1} else {like=-1}
-  price = 123.2;
+  let price = 123.20;
   /*
   request.get(
     ' https://finance.google.com/finance/info?q=NASDAQ%3a'+stock, 
@@ -42,15 +42,16 @@ router.get('/api/stock-prices',(req, res) => {
     }
   */
 
-  let stockData = {
-    "stockData":{
-      "stock":stock,
-      "price":price,
-      "likes":like
-    }
-  }
-  res.send(stockData);
-  
+  Stock.findOne({name: stock},(err, data) => {
+      if (data.length == 0) {
+        stock = new Stock ({name: stock, price: price, like: 1});
+        stock.save((err,stock) => {console.log(stock);})
+      } else {
+        if (req.query.like) {data.like+=1};
+        data.price = price;
+        data.save((stock)=>{console.log('saved!')})
+      }
+    })
 
 });
 
