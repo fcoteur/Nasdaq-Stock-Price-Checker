@@ -6,7 +6,9 @@ var StockSchema = new Schema(
   {
     name: {type: String, required: true},
     price: {type: Number},
-    udpate: {type: Date, default: Date.now}
+    likes: {type: Number, default: 0},
+    udpate: {type: Date, default: Date.now},
+    ips: [{type: String, default: []}]
   }
 );
 
