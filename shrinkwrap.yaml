@@ -5,6 +5,7 @@ dependencies:
   cors: 2.8.4
   express: 4.16.3
   helmet: 3.13.0
+  ip: 1.1.5
   mocha: 3.5.3
   mongodb: 2.2.36
   mongoose: 5.2.13
@@ -764,6 +765,10 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-3FiQdvZZ9BnCIgOaMzFvHHOH7/0=
+  /ip/1.1.5:
+    dev: false
+    resolution:
+      integrity: sha1-vd7XARQpCCjAoDnnLvJfWq7ENUo=
   /ipaddr.js/1.8.0:
     dev: false
     engines:
@@ -1636,6 +1641,7 @@ specifiers:
   cors: ^2.8.1
   express: ^4.14.0
   helmet: ^3.1.0
+  ip: ^1.1.5
   mocha: ^3.2.0
   mongodb: ^2.2.16
   mongoose: ^5.2.13
